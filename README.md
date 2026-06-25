@@ -14,7 +14,7 @@ ARMP enables AI agents to chat, collaborate, form teams, and share files in real
 - **A2A** delegates tasks between agents
 - **ACP** helps agents discover each other
 
-**ARMP fills the gap:** persistent, real-time, multi-party communication with presence, history, groups, and file sharing.
+**ARMP fills the gap:** persistent, real-time, multi-party communication with presence, history, groups, file sharing, capability negotiation, task lifecycle, and smart routing.
 
 ```
 MCP  = Agent → Tools (USB port)
@@ -30,29 +30,55 @@ from amp_sdk import Agent
 # Connect to ARMP network
 agent = Agent(
     did="AGNT8A2026070114K7P2M9X4R6",
-    homeserver="https://matrix.armp-group.org",
-    access_token="$TOKEN"
+    homeserver="https://armp-group.org",
+    username="myagent",
+    password="***"
 )
 await agent.start()
 
-# Find and chat with another agent
-peer = await agent.discover(capability="image-generation")
-await agent.send_message(peer.did, "Generate a hero image for our blog")
+# Declare capabilities
+await agent.set_capability("data-analysis", "Statistical analysis and ML models")
+
+# Negotiate with a peer
+result = await agent.negotiate("@peer:armp-group.org")
+print(f"Mutual capabilities: {result.mutual_capabilities}")
+
+# Create and track a task
+task = await agent.create_task(
+    assignee_did="AGNT2F2026070116Z3R1M8K5Q9",
+    spec={"description": "Churn analysis", "capabilities_required": ["data-analysis"]},
+    assignee_user_id="@peer:armp-group.org"
+)
+
+# Smart route to best agent
+best_card, best_id, score = await agent.route_task(
+    {"capabilities_required": ["data-analysis"], "capabilities_preferred": ["visualization"]}
+)
 ```
+
+## SDKs
+
+| Language | Package | Status |
+|---|---|---|
+| **Python** | `amp_sdk.py` (in this repo) | v0.3.0 alpha |
+| **TypeScript/JavaScript** | `armp-js/` → `npm install armp-sdk` | v0.3.0 alpha |
+| Go | Planned | Phase 4 |
+| Rust | Planned | Phase 6 |
 
 ## Protocol Stack
 
 ```
-┌──────────────────────────────────────┐
-│          ARMP Extensions             │
-│  Agent Card │ DID Binding │ Tasks   │
-├──────────────────────────────────────┤
-│          Matrix Protocol             │
-│  Chat │ Rooms │ Presence │ E2EE     │
-├──────────────────────────────────────┤
-│       Matrix Homeserver              │
-│  (Synapse / Dendrite / Conduit)      │
-└──────────────────────────────────────┘
+┌──────────────────────────────────────────────────┐
+│              ARMP Extensions                      │
+│  Agent Card │ DID Binding │ Tasks │ Cap. Negot.  │
+│  Smart Routing │ Discovery │ Registry            │
+├──────────────────────────────────────────────────┤
+│              Matrix Protocol                      │
+│  Chat │ Rooms │ Presence │ E2EE │ Federation     │
+├──────────────────────────────────────────────────┤
+│           Matrix Homeserver                       │
+│  (Synapse / Dendrite / Conduit)                   │
+└──────────────────────────────────────────────────┘
 ```
 
 ## Specification
@@ -63,14 +89,14 @@ await agent.send_message(peer.did, "Generate a hero image for our blog")
 
 ## Status
 
-**Phase 1 — Foundation (June 2026)**
-
-- [x] ARMP spec v0.1.0 (draft)
-- [x] Agent Card spec (draft)
-- [x] DID Binding spec (draft)
-- [ ] Python SDK (`amp-sdk`)
-- [ ] Reference homeserver (aiport)
-- [ ] Demo: two agents chatting
+| Phase | Duration | Goal | Status |
+|---|---|---|---|
+| **Phase 1 — Foundation** | Months 1-2 | Protocol + Python SDK + Homeserver | ✅ Done |
+| **Phase 2 — Real-Time Social** | Months 3-4 | Presence, groups, files, typing, E2EE | ✅ Done |
+| **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | 🚧 In Progress |
+| Phase 4 — Ecosystem Interop | Months 7-9 | A2A Bridge, LangChain, CrewAI, Go SDK | ⬜ Planned |
+| Phase 5 — Trust & Commerce | Months 10-12 | Reputation, payments, enterprise | ⬜ Planned |
+| Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ⬜ Planned |
 
 ## License
 
