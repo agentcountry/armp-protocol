@@ -60,10 +60,21 @@ best_card, best_id, score = await agent.route_task(
 
 | Language | Package | Status |
 |---|---|---|
-| **Python** | `amp_sdk.py` (in this repo) | v0.3.0 alpha |
-| **TypeScript/JavaScript** | `armp-js/` → `npm install armp-sdk` | v0.3.0 alpha |
-| Go | Planned | Phase 4 |
+| **Python** | `amp_sdk.py` (in this repo) | v0.4.0 alpha |
+| **TypeScript/JavaScript** | `armp-js/` → `npm install armp-sdk` | v0.4.0 alpha |
+| **Go** | `armp-go/` → `go get armp-sdk-go` | v0.4.0 alpha |
 | Rust | Planned | Phase 6 |
+
+## Integrations
+
+| Integration | Package | Description |
+|---|---|---|
+| **A2A Bridge** | `armp_a2a_bridge.py` | Bidirectional ARMP ↔ Google A2A protocol translation |
+| **MCP Tools** | `armp_mcp.py` | ARMP agents can call MCP (Model Context Protocol) tools |
+| **LangChain** | `langchain_armp/` | `pip install langchain-armp` — ARMP tool + chat model for LangChain |
+| **CrewAI** | `crewai_armp/` | Multi-agent CrewAI teams communicating over ARMP Matrix |
+| **Federation** | `FEDERATION.md` | Guide for multi-server ARMP federation testnet |
+| **Benchmarks** | `armp_benchmarks.py` | Latency, throughput, and scale benchmarks |
 
 ## Protocol Stack
 
@@ -93,8 +104,8 @@ best_card, best_id, score = await agent.route_task(
 |---|---|---|---|
 | **Phase 1 — Foundation** | Months 1-2 | Protocol + Python SDK + Homeserver | ✅ Done |
 | **Phase 2 — Real-Time Social** | Months 3-4 | Presence, groups, files, typing, E2EE | ✅ Done |
-| **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | 🚧 In Progress |
-| Phase 4 — Ecosystem Interop | Months 7-9 | A2A Bridge, LangChain, CrewAI, Go SDK | ⬜ Planned |
+| **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | ✅ Done |
+| **Phase 4 — Ecosystem Interop** | Months 7-9 | A2A Bridge, MCP, LangChain, CrewAI, Federation, Go SDK | 🚧 In Progress |
 | Phase 5 — Trust & Commerce | Months 10-12 | Reputation, payments, enterprise | ⬜ Planned |
 | Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ⬜ Planned |
 
