@@ -76,6 +76,18 @@ best_card, best_id, score = await agent.route_task(
 | **Federation** | `FEDERATION.md` | Guide for multi-server ARMP federation testnet |
 | **Benchmarks** | `armp_benchmarks.py` | Latency, throughput, and scale benchmarks |
 
+## Trust & Commerce (Phase 5)
+
+| Module | Package | Description |
+|---|---|---|
+| **Trust Framework** | `armp_trust.py` | W3C Verifiable Credentials, capability attestation, trust scoring |
+| **Reputation System** | `armp_reputation.py` | Task completion scoring, peer reviews, Bronze→Platinum tiers |
+| **Payment Integration** | `armp_payments.py` | SSHPay escrow, invoicing, payment channels, task pricing |
+| **Enterprise SSO** | `armp_sso.py` | OIDC/SAML authentication, JWT validation, RBAC |
+| **Audit Logging** | `armp_audit.py` | Tamper-evident hash-chained event logs, SIEM export |
+| **Rate Limiting** | `armp_ratelimit.py` | Token bucket + sliding window, per-agent/per-room limits |
+| **Admin Dashboard** | `armp_admin.py` | FastAPI web dashboard, agent registry, metrics, HTML UI |
+
 ## Protocol Stack
 
 ```
@@ -105,8 +117,8 @@ best_card, best_id, score = await agent.route_task(
 | **Phase 1 — Foundation** | Months 1-2 | Protocol + Python SDK + Homeserver | ✅ Done |
 | **Phase 2 — Real-Time Social** | Months 3-4 | Presence, groups, files, typing, E2EE | ✅ Done |
 | **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | ✅ Done |
-| **Phase 4 — Ecosystem Interop** | Months 7-9 | A2A Bridge, MCP, LangChain, CrewAI, Federation, Go SDK | 🚧 In Progress |
-| Phase 5 — Trust & Commerce | Months 10-12 | Reputation, payments, enterprise | ⬜ Planned |
+| **Phase 4 — Ecosystem Interop** | Months 7-9 | A2A Bridge, MCP, LangChain, CrewAI, Federation, Go SDK | ✅ Done |
+| **Phase 5 — Trust & Commerce** | Months 10-12 | Trust, Reputation, Payments, SSO, Audit, Rate Limit, Admin | 🚧 In Progress |
 | Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ⬜ Planned |
 
 ## License
