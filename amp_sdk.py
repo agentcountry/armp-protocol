@@ -1,5 +1,5 @@
 """
-ARMP Python SDK v0.3.0
+ARMP Python SDK v0.5.0
 
 Agent Real-time Message Protocol — Python client library.
 Real Matrix integration via matrix-nio. Apache 2.0.
