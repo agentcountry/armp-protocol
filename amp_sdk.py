@@ -64,7 +64,7 @@ class AgentCard:
     description: str = ""
     capabilities: list = field(default_factory=list)
     endpoints: dict = field(default_factory=dict)
-    version: str = "0.3.0"
+    version: str = "0.5.0"
 
     def to_dict(self) -> dict:
         return {
@@ -86,7 +86,7 @@ class AgentCard:
             description=data.get("description", ""),
             capabilities=data.get("capabilities", []),
             endpoints=data.get("endpoints", {}),
-            version=data.get("version", "0.3.0"),
+            version=data.get("version", "0.5.0"),
         )
 
 
@@ -1076,7 +1076,7 @@ async def demo():
     """Phase 3 demo: Capability negotiation + task lifecycle + discovery."""
 
     HOMESERVER = "http://armp-group.org"
-    print(f"🚀 ARMP v0.3.0 — Intelligence Layer Demo\n   Homeserver: {HOMESERVER}\n")
+    print(f"🚀 ARMP v0.5.0 — Full Protocol Demo\n   Homeserver: {HOMESERVER}\n")
 
     # Agent Alpha — text/social agent
     alpha = Agent(

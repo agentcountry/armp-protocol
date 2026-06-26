@@ -106,7 +106,20 @@ best_card, best_id, score = await agent.route_task(
 
 ## Specification
 
-- [ARMP Core Spec v0.1.0](specs/drafts/armp-v0.1.0.md)
+### Core Protocol
+- [ARMP Core Spec v1.0.0](specs/drafts/armp-v1.0.0.md) — Full protocol specification covering all Phase 1–5 features
+
+### Module Specifications
+- [Trust Framework](specs/drafts/trust-framework-v1.0.0.md) — W3C Verifiable Credentials for agent capability attestation
+- [Reputation System](specs/drafts/reputation-v1.0.0.md) — Decentralized agent reputation scoring
+- [Payment Integration](specs/drafts/payments-v1.0.0.md) — Agent-to-agent cryptocurrency payments
+- [A2A Bridge](specs/drafts/a2a-bridge-v1.0.0.md) — Bidirectional ARMP ↔ Google A2A protocol translation
+- [MCP Integration](specs/drafts/mcp-integration-v1.0.0.md) — ARMP agents calling MCP tools
+- [Enterprise SSO](specs/drafts/sso-v1.0.0.md) — OIDC/SAML/JWT authentication
+- [Audit Logging](specs/drafts/audit-v1.0.0.md) — Tamper-evident compliance logging
+- [Rate Limiting](specs/drafts/ratelimit-v1.0.0.md) — Token bucket + sliding window protection
+
+### Legacy (Phase 1)
 - [Agent Card Spec](specs/drafts/agent-card.md)
 - [DID Binding Spec](specs/drafts/did-binding.md)
 
