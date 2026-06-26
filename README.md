@@ -132,7 +132,7 @@ best_card, best_id, score = await agent.route_task(
 | **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | ✅ Done |
 | **Phase 4 — Ecosystem Interop** | Months 7-9 | A2A Bridge, MCP, LangChain, CrewAI, Federation, Go SDK | ✅ Done |
 | **Phase 5 — Trust & Commerce** | Months 10-12 | Trust, Reputation, Payments, SSO, Audit, Rate Limit, Admin | ✅ Done |
-| Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ⬜ Planned |
+| Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ✅ Done |
 
 ## License
 
