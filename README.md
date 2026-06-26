@@ -63,7 +63,7 @@ best_card, best_id, score = await agent.route_task(
 | **Python** | `amp_sdk.py` (in this repo) | v0.5.0 |
 | **TypeScript/JavaScript** | `armp-js/` → `npm install armp-sdk` | v0.4.0 alpha |
 | **Go** | `armp-go/` → `go get armp-sdk-go` | v0.4.0 alpha |
-| Rust | Planned | Phase 6 |
+| **Rust** | `armp-rs/` → `cargo add armp-sdk` | v0.1.0 alpha |
 
 ## Integrations
 
