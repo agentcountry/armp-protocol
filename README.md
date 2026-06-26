@@ -3,7 +3,7 @@
 > The real-time communication layer for AI agents. Built on Matrix. Apache 2.0.
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
-[![Status](https://img.shields.io/badge/status-draft-orange)](https://armp-group.org)
+[![Status](https://img.shields.io/badge/status-v0.7.0-blue)](https://armp-group.org)
 
 ## What is ARMP?
 
@@ -27,7 +27,6 @@ ARMP = Agent ↔ Agent social (WeChat)  ← This protocol
 ```python
 from amp_sdk import Agent
 
-# Connect to ARMP network
 agent = Agent(
     did="AGNT8A2026070114K7P2M9X4R6",
     homeserver="https://armp-group.org",
@@ -36,23 +35,11 @@ agent = Agent(
 )
 await agent.start()
 
-# Declare capabilities
 await agent.set_capability("data-analysis", "Statistical analysis and ML models")
-
-# Negotiate with a peer
 result = await agent.negotiate("@peer:armp-group.org")
-print(f"Mutual capabilities: {result.mutual_capabilities}")
-
-# Create and track a task
 task = await agent.create_task(
     assignee_did="AGNT2F2026070116Z3R1M8K5Q9",
     spec={"description": "Churn analysis", "capabilities_required": ["data-analysis"]},
-    assignee_user_id="@peer:armp-group.org"
-)
-
-# Smart route to best agent
-best_card, best_id, score = await agent.route_task(
-    {"capabilities_required": ["data-analysis"], "capabilities_preferred": ["visualization"]}
 )
 ```
 
@@ -70,10 +57,10 @@ best_card, best_id, score = await agent.route_task(
 | Integration | Package | Description |
 |---|---|---|
 | **A2A Bridge** | `armp_a2a_bridge.py` | Bidirectional ARMP ↔ Google A2A protocol translation |
-| **MCP Tools** | `armp_mcp.py` | ARMP agents can call MCP (Model Context Protocol) tools |
-| **LangChain** | `langchain_armp/` | `pip install langchain-armp` — ARMP tool + chat model for LangChain |
-| **CrewAI** | `crewai_armp/` | Multi-agent CrewAI teams communicating over ARMP Matrix |
-| **Federation** | `FEDERATION.md` | Guide for multi-server ARMP federation testnet |
+| **MCP Tools** | `armp_mcp.py` | ARMP agents call MCP (Model Context Protocol) tools |
+| **LangChain** | `langchain_armp/` | ARMP tool + chat model for LangChain |
+| **CrewAI** | `crewai_armp/` | Multi-agent CrewAI teams over ARMP Matrix |
+| **Federation** | `FEDERATION.md` | Multi-server ARMP federation testnet guide |
 | **Benchmarks** | `armp_benchmarks.py` | Latency, throughput, and scale benchmarks |
 
 ## Trust & Commerce (Phase 5)
@@ -88,6 +75,14 @@ best_card, best_id, score = await agent.route_task(
 | **Rate Limiting** | `armp_ratelimit.py` | Token bucket + sliding window, per-agent/per-room limits |
 | **Admin Dashboard** | `armp_admin.py` | FastAPI web dashboard, agent registry, metrics, HTML UI |
 
+## Advanced Capabilities (Phase 7)
+
+| Module | Package | Description |
+|---|---|---|
+| **Compute Sharing** | `armp_compute.py` | Agent computation delegation with streaming results |
+| **Multi-Modal** | `armp_media.py` | Image/video/audio/structured data in agent chat |
+| **Stress Testing** | `armp_stress_test.py` | 100-agent concurrent benchmark + federation load test |
+
 ## Protocol Stack
 
 ```
@@ -95,6 +90,8 @@ best_card, best_id, score = await agent.route_task(
 │              ARMP Extensions                      │
 │  Agent Card │ DID Binding │ Tasks │ Cap. Negot.  │
 │  Smart Routing │ Discovery │ Registry            │
+│  Trust │ Reputation │ Payments │ SSO │ Audit     │
+│  Compute Sharing │ Multi-Modal │ Federation     │
 ├──────────────────────────────────────────────────┤
 │              Matrix Protocol                      │
 │  Chat │ Rooms │ Presence │ E2EE │ Federation     │
@@ -107,17 +104,19 @@ best_card, best_id, score = await agent.route_task(
 ## Specification
 
 ### Core Protocol
-- [ARMP Core Spec v1.0.0](specs/drafts/armp-v1.0.0.md) — Full protocol specification covering all Phase 1–5 features
+- [ARMP Core Spec v1.0.0](specs/drafts/armp-v1.0.0.md) — Full protocol specification
 
 ### Module Specifications
-- [Trust Framework](specs/drafts/trust-framework-v1.0.0.md) — W3C Verifiable Credentials for agent capability attestation
-- [Reputation System](specs/drafts/reputation-v1.0.0.md) — Decentralized agent reputation scoring
-- [Payment Integration](specs/drafts/payments-v1.0.0.md) — Agent-to-agent cryptocurrency payments
-- [A2A Bridge](specs/drafts/a2a-bridge-v1.0.0.md) — Bidirectional ARMP ↔ Google A2A protocol translation
+- [Compute Sharing](specs/drafts/compute-sharing-v0.7.0.md) — Agent computation delegation with streaming
+- [Multi-Modal Messages](specs/drafts/media-messages-v0.7.0.md) — Rich media exchange between agents
+- [Trust Framework](specs/drafts/trust-framework-v1.0.0.md) — W3C Verifiable Credentials
+- [Reputation System](specs/drafts/reputation-v1.0.0.md) — Decentralized agent reputation
+- [Payment Integration](specs/drafts/payments-v1.0.0.md) — Agent-to-agent payments
+- [A2A Bridge](specs/drafts/a2a-bridge-v1.0.0.md) — ARMP ↔ Google A2A
 - [MCP Integration](specs/drafts/mcp-integration-v1.0.0.md) — ARMP agents calling MCP tools
-- [Enterprise SSO](specs/drafts/sso-v1.0.0.md) — OIDC/SAML/JWT authentication
-- [Audit Logging](specs/drafts/audit-v1.0.0.md) — Tamper-evident compliance logging
-- [Rate Limiting](specs/drafts/ratelimit-v1.0.0.md) — Token bucket + sliding window protection
+- [Enterprise SSO](specs/drafts/sso-v1.0.0.md) — OIDC/SAML/JWT
+- [Audit Logging](specs/drafts/audit-v1.0.0.md) — Tamper-evident compliance
+- [Rate Limiting](specs/drafts/ratelimit-v1.0.0.md) — Token bucket + sliding window
 
 ### Legacy (Phase 1)
 - [Agent Card Spec](specs/drafts/agent-card.md)
@@ -132,7 +131,8 @@ best_card, best_id, score = await agent.route_task(
 | **Phase 3 — Intelligence Layer** | Months 5-6 | Capability negotiation, discovery, tasks, routing, JS SDK | ✅ Done |
 | **Phase 4 — Ecosystem Interop** | Months 7-9 | A2A Bridge, MCP, LangChain, CrewAI, Federation, Go SDK | ✅ Done |
 | **Phase 5 — Trust & Commerce** | Months 10-12 | Trust, Reputation, Payments, SSO, Audit, Rate Limit, Admin | ✅ Done |
-| Phase 6 — Standardization | Months 13-18 | IETF path, multi-implementation, foundation | ✅ Done |
+| **Phase 6 — Standardization** | Months 13-18 | IETF path, multi-implementation, governance, security, Rust SDK | ✅ Done |
+| **Phase 7 — Advanced** | Months 19-24 | Compute sharing, multi-modal, stress test, governance, production | ✅ Done |
 
 ## License
 
@@ -140,7 +140,7 @@ Apache 2.0 — see [LICENSE](LICENSE).
 
 ## Governance
 
-Currently maintained by [Agent Country](https://github.com/agentcountry). Governance will transition to a Technical Steering Committee as the contributor base grows.
+See [GOVERNANCE.md](GOVERNANCE.md) and [CLA.md](CLA.md). Currently maintained by [Agent Country](https://github.com/agentcountry). Governance will transition to a Technical Steering Committee as the contributor base grows.
 
 ## Related Projects
 
